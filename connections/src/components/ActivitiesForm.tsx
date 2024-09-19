@@ -1,0 +1,71 @@
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+interface ActivityFormProps {
+  addActivity: (activity: Activity) => void;
+}
+
+interface Activity {
+  id: string;
+  name: string;
+  place: string;
+  time: string;
+  description: string;
+}
+
+const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
+  const [name, setName] = useState('');
+  const [place, setPlace] = useState('');
+  const [time, setTime] = useState('');
+  const [description, setDescription] = useState('');
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const newActivity: Activity = {
+      id: Date.now().toString(),
+      name,
+      place,
+      time,
+      description,
+    };
+    addActivity(newActivity);
+    navigate('/');
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <h2>Add New Activity</h2>
+      <input
+        type="text"
+        placeholder="Name"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Place"
+        value={place}
+        onChange={(e) => setPlace(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Time"
+        value={time}
+        onChange={(e) => setTime(e.target.value)}
+        required
+      />
+      <textarea
+        placeholder="Description"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+        required
+      ></textarea>
+      <button type="submit">Add Activity</button>
+    </form>
+  );
+};
+
+export default ActivityForm;
