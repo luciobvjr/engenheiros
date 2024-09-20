@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './ActivitiesForm.module.css';
 
 interface ActivityFormProps {
   addActivity: (activity: Activity) => void;
@@ -34,31 +35,31 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <h2>Add New Activity</h2>
       <input
         type="text"
-        placeholder="Name"
+        placeholder="Nome"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
       />
       <input
         type="text"
-        placeholder="Place"
+        placeholder="Lugar"
         value={place}
         onChange={(e) => setPlace(e.target.value)}
         required
       />
       <input
         type="text"
-        placeholder="Time"
+        placeholder="Horário"
         value={time}
         onChange={(e) => setTime(e.target.value)}
         required
       />
       <textarea
-        placeholder="Description"
+        placeholder="Descrição"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required

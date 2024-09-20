@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from './Menu.module.css';
 
 interface Activity {
   id: string;
@@ -12,8 +13,8 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ activities }) => {
   return (
-    <nav>
-      <h2>Activities Menu</h2>
+    <nav className={styles.menu}>
+      <h2>Atividades</h2>
       <ul>
         {activities.map((activity) => (
           <li key={activity.id}>

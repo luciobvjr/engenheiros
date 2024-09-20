@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import styles from './ActivityDetails.module.css';
 
 interface Activity {
   id: string;
@@ -27,7 +28,7 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
   };
 
   return (
-    <div>
+    <div className={styles.details}>
       <h2>{activity.name}</h2>
       <p>Place: {activity.place}</p>
       <p>Time: {activity.time}</p>
