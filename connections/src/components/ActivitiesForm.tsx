@@ -36,7 +36,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <h2>Add New Activity</h2>
+      <h2>Adicionar Nova Atividade</h2>
       <input
         type="text"
         placeholder="Nome"
@@ -63,7 +63,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
-      ></textarea>
+      />
       <button type="submit">Add Activity</button>
     </form>
   );

@@ -23,17 +23,20 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
   if (!activity) return <p>Activity not found!</p>;
 
   const handleDelete = () => {
-    deleteActivity(id!);
+    if (id) {
+      deleteActivity(id);
+      navigate('/');
+    }
     navigate('/');
   };
 
   return (
     <div className={styles.details}>
       <h2>{activity.name}</h2>
-      <p>Place: {activity.place}</p>
-      <p>Time: {activity.time}</p>
-      <p>Description: {activity.description}</p>
-      <button onClick={handleDelete}>Delete Activity</button>
+      <p>Lugar: {activity.place}</p>
+      <p>Horário: {activity.time}</p>
+      <p>Descrição: {activity.description}</p>
+      <button type="button" onClick={handleDelete}>Delete Activity</button>
     </div>
   );
 };
