@@ -25,12 +25,12 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: ./engenheiros/connections
+      working-directory: /connections
 
     - name: Build application
       run: npm run build
-      working-directory: ./engenheiros/connections
+      working-directory: /connections
 
     - name: Run tests
       run: npm test
-      working-directory: ./engenheiros/connections
+      working-directory: /connections
