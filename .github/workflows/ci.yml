@@ -16,18 +16,21 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
 
     - name: Set up Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: '16'
 
     - name: Install dependencies
       run: npm install
+      working-directory: ./engenheiros/connections
 
     - name: Build application
       run: npm run build
+      working-directory: ./engenheiros/connections
 
     - name: Run tests
-      run: npm test -- --watchAll=false
+      run: npm test
+      working-directory: ./engenheiros/connections
