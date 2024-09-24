@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Menu from './components/Menu';
 import ActivityDetails from './components/ActivityDetails';
@@ -13,6 +14,10 @@ interface Activity {
 }
 
 const App: React.FC = () => {
+  useEffect(() => {
+    document.title = 'EduConnections';
+  });
+
   const [activities, setActivities] = useState<Activity[]>([]);
 
   const addActivity = (activity: Activity) => {
