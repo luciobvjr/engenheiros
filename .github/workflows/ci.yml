@@ -22,15 +22,29 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: '16'
-
-    - name: Install dependencies
+    
+    # frontend jobs
+    - name: Install frontend dependencies
       run: npm install
-      working-directory: ./connections
+      working-directory: ./connections/frontend
 
-    - name: Build application
+    - name: Build frontend application
       run: npm run build
-      working-directory: ./connections
+      working-directory: ./connections/frontend
 
-    - name: Run tests
+    - name: Run frontend tests
       run: npm test
-      working-directory: ./connections
+      working-directory: ./connections/frontend
+
+    # backend jobs
+    - name: Install backend dependencies
+      run: npm install
+      working-directory: ./connections/backend
+
+    - name: Build backend application
+      run: npm run build
+      working-directory: ./connections/backend
+
+#    - name: Run backend tests
+#      run: npm test
+#      working-directory: ./connections/backend
