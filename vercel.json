@@ -2,10 +2,7 @@
   "builds": [
     {
       "src": "connections/backend/src/index.ts",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": ["connections/backend/dist/**/*"]
-      }
+      "use": "@vercel/node"
     }
   ],  
   "rewrites": [
