@@ -1,30 +1,41 @@
 import express, { type Request, type Response } from 'express';
 import { createClient } from '@supabase/supabase-js'
 import dotenv from 'dotenv';
+import e from 'express';
 
 dotenv.config();
 
-const connectToDatabase = async () => {
+const connectToDatabase = () => {
     if (!process.env.DATABASE_URL || !process.env.DATABASE_API_KEY) {
         throw new Error('Environment variables are not set');
     }
     const supabase = createClient(process.env.DATABASE_URL, process.env.DATABASE_API_KEY)
+
+    if (!supabase) {
+        throw new Error('Could not connect to the database');
+    }
+
+    console.log('Connected to the database');
     return supabase;
 }
 
-connectToDatabase().then((supabase) => {
-    console.log('Connected to database');
-}).catch((error) => {
-    console.error(error);
-});
+const database = connectToDatabase();
 
 const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-app.get('/api/status', (req: Request, res: Response) => {
-    res.status(200).send('OK');
+app.get('/api/cursos', async (req: Request, res: Response) => {
+    const { data, error } = await database
+                            .from('cursos')
+                            .select('*');
+    
+    if (error) {
+        res.status(500).send('Internal server error');
+    }
+
+    res.json(data);
 });
 
 app.listen(port, () => {
