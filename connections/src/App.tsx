@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import ActivityDetails from './components/ActivityDetails';
 import MainPage from './components/MainPage';
-import ActivityForm from './components/ActivitiesForm'; // Import the form component
+import ActivityForm from './components/ActivitiesForm'; 
 import './index.css';
 
 interface Activity {
@@ -10,6 +10,7 @@ interface Activity {
   name: string;
   place: string;
   time: string;
+  price: string;
   description: string;
 }
 

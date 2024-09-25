@@ -6,6 +6,7 @@ interface Activity {
   name: string;
   place: string;
   time: string;
+  price: string;
   description: string;
 }
 
@@ -64,6 +65,12 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
             onChange={(e) => setEditedActivity({ ...editedActivity!, time: e.target.value })}
             required
           />
+          <input
+            type="text"
+            value={editedActivity?.price}
+            onChange={(e) => setEditedActivity({ ...editedActivity!, price: e.target.value })}
+            required
+          />
           <textarea
             value={editedActivity?.description}
             onChange={(e) => setEditedActivity({ ...editedActivity!, description: e.target.value })}
@@ -75,8 +82,9 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
       ) : (
         <>
           <h2>{activity.name}</h2>
-          <p>Place: {activity.place}</p>
-          <p>Time: {activity.time}</p>
+          <p>Local: {activity.place}</p>
+          <p>Horário: {activity.time}</p>
+          <p>Preço: R$ {activity.price}</p>
           <p>Description: {activity.description}</p>
           <button onClick={handleEdit}>Edit Activity</button>
           <button onClick={handleDelete}>Delete Activity</button>

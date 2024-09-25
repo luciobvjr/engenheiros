@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface Activity {
+  id: string;
   name: string;
   place: string;
   time: string;
+  price: string;
   description: string;
 }
 
@@ -14,9 +16,11 @@ interface ActivityFormProps {
 
 const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   const [formData, setFormData] = useState({
+    id: '',
     name: '',
     place: '',
     time: '',
+    price: '',
     description: '',
   });
 
@@ -40,7 +44,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Nome do curso:</label>
         <input
           type="text"
           id="name"
@@ -51,7 +55,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
         />
       </div>
       <div>
-        <label htmlFor="place">Place:</label>
+        <label htmlFor="place">Local:</label>
         <input
           type="text"
           id="place"
@@ -62,7 +66,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
         />
       </div>
       <div>
-        <label htmlFor="time">Time:</label>
+        <label htmlFor="time">Horário:</label>
         <input
           type="text"
           id="time"
@@ -73,7 +77,18 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
         />
       </div>
       <div>
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="price">Valor:</label>
+        <input
+          type="text"
+          id="price"
+          name="price"
+          value={formData.price}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Descrição:</label>
         <textarea
           id="description"
           name="description"
