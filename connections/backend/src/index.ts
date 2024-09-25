@@ -1,6 +1,7 @@
 import express, { type Request, type Response } from 'express';
 import { createClient } from '@supabase/supabase-js'
 import dotenv from 'dotenv';
+import cors from 'cors';
 import e from 'express';
 
 dotenv.config();
@@ -22,9 +23,10 @@ const connectToDatabase = () => {
 const database = connectToDatabase();
 
 const app = express();
-const port = 3000;
+const port = 5555;
 
 app.use(express.json());
+app.use(cors());
 
 app.get('/api/cursos', async (req: Request, res: Response) => {
     const { data, error } = await database
@@ -41,3 +43,5 @@ app.get('/api/cursos', async (req: Request, res: Response) => {
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
+
+export default app;
