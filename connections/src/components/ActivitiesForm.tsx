@@ -34,70 +34,40 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Add the new activity (without ID, since it's generated in App.tsx)
-    addActivity(formData);
+    addActivity(formData);  // Adiciona a atividade
 
-    // Navigate back to the main page after adding the activity
     navigate('/');
   };
 
   return (
+    // Html do formulário de adicionar atividade
+
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Nome do curso:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-      </div>
+        <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
+      </div> 
+
       <div>
         <label htmlFor="place">Local:</label>
-        <input
-          type="text"
-          id="place"
-          name="place"
-          value={formData.place}
-          onChange={handleChange}
-          required
-        />
+        <input type="text" id="place" name="place" value={formData.place} onChange={handleChange} required />
       </div>
+
       <div>
         <label htmlFor="time">Horário:</label>
-        <input
-          type="text"
-          id="time"
-          name="time"
-          value={formData.time}
-          onChange={handleChange}
-          required
-        />
+        <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} required />
       </div>
+
       <div>
         <label htmlFor="price">Valor:</label>
-        <input
-          type="text"
-          id="price"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
+        <input type="text" id="price" name="price" value={formData.price} onChange={handleChange} required/>
       </div>
+
       <div>
         <label htmlFor="description">Descrição:</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
+        <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
       </div>
-      <button type="submit">Add Activity</button>
+      <button type="submit">Adicionar curso</button>
     </form>
   );
 };

@@ -24,7 +24,7 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
   const [isEditing, setIsEditing] = useState(false);
   const [editedActivity, setEditedActivity] = useState(activity);
 
-  if (!activity) return <p>Activity not found!</p>;
+  if (!activity) return <p>Curso não encontrado!</p>;
 
   const handleDelete = () => {
     deleteActivity(id!);
@@ -44,40 +44,23 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
   };
 
   return (
+    // Html da página de detalhes da atividade
+
     <div>
-      {isEditing ? (
+      {isEditing ? ( // formulário para editar a atividade
         <form onSubmit={handleEditSubmit}>
-          <input
-            type="text"
-            value={editedActivity?.name}
-            onChange={(e) => setEditedActivity({ ...editedActivity!, name: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            value={editedActivity?.place}
-            onChange={(e) => setEditedActivity({ ...editedActivity!, place: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            value={editedActivity?.time}
-            onChange={(e) => setEditedActivity({ ...editedActivity!, time: e.target.value })}
-            required
-          />
-          <input
-            type="text"
-            value={editedActivity?.price}
-            onChange={(e) => setEditedActivity({ ...editedActivity!, price: e.target.value })}
-            required
-          />
-          <textarea
-            value={editedActivity?.description}
-            onChange={(e) => setEditedActivity({ ...editedActivity!, description: e.target.value })}
-            required
-          />
-          <button type="submit">Save Changes</button>
-          <button type="button" onClick={() => setIsEditing(false)}>Cancel</button>
+          <input type="text" value={editedActivity?.name} onChange={(e) => setEditedActivity({ ...editedActivity!, name: e.target.value })} required />
+
+          <input type="text" value={editedActivity?.place} onChange={(e) => setEditedActivity({ ...editedActivity!, place: e.target.value })} required />
+
+          <input type="text" value={editedActivity?.time} onChange={(e) => setEditedActivity({ ...editedActivity!, time: e.target.value })} required />
+
+          <input type="text" value={editedActivity?.price} onChange={(e) => setEditedActivity({ ...editedActivity!, price: e.target.value })} required />
+
+          <textarea value={editedActivity?.description} onChange={(e) => setEditedActivity({ ...editedActivity!, description: e.target.value })} required />
+
+          <button type="submit">Salvar alterações</button>
+          <button type="button" onClick={() => setIsEditing(false)}>Cancelar</button>
         </form>
       ) : (
         <>
@@ -86,8 +69,8 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
           <p>Horário: {activity.time}</p>
           <p>Preço: R$ {activity.price}</p>
           <p>Description: {activity.description}</p>
-          <button onClick={handleEdit}>Edit Activity</button>
-          <button onClick={handleDelete}>Delete Activity</button>
+          <button onClick={handleEdit}>Editar</button>
+          <button onClick={handleDelete}>Deletar</button>
         </>
       )}
     </div>

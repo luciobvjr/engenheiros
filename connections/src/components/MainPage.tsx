@@ -16,8 +16,9 @@ interface MainPageProps {
 
 const MainPage: React.FC<MainPageProps> = ({ activities }) => {
   return (
+    // Html da página principal
     <div>
-      <h1>Activities</h1>
+      <h1>Cursos</h1>
       <ul>
         {activities.map((activity) => (
           <li key={activity.id}>
@@ -26,9 +27,10 @@ const MainPage: React.FC<MainPageProps> = ({ activities }) => {
         ))}
       </ul>
       <button>
-        <Link to="/add">Add New Activity</Link>
+        <Link to="/add">Adicionar novo curso</Link>
       </button>
     </div>
+  
   );
 };
 

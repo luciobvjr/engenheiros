@@ -16,12 +16,13 @@ interface Activity {
 
 const App: React.FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [idCounter, setIdCounter] = useState(1); // Start the ID counter at 1
+  const [idCounter, setIdCounter] = useState(1); // Faz o contador de Id começar no 1
 
   const addActivity = (activity: Omit<Activity, 'id'>) => {
+
     const newActivity = {
       ...activity,
-      id: idCounter.toString(), // Use idCounter as the ID
+      id: idCounter.toString(), // Salva o valor de idCounter como id
     };
     setActivities([...activities, newActivity]); // Add the new activity to the activities array
     setIdCounter(idCounter + 1); // Increment the ID counter
@@ -39,29 +40,17 @@ const App: React.FC = () => {
     <Router>
       <div className="app">
         <Routes>
-          {/* Main page shows only the activities and Add button */}
-          <Route 
-            path="/" 
-            element={<MainPage activities={activities} />}  // Pass activities only to MainPage
-          />
-          
-          {/* Route to add a new activity */}
-          <Route 
-            path="/add" 
-            element={<ActivityForm addActivity={addActivity} />}  // Pass addActivity to ActivityForm
-          />
+          <Route path="/" element={<MainPage activities={activities} />} />  // Manda as atividades para a MainPage
 
-          {/* Route to view, delete, or edit a single activity */}
-          <Route
-            path="/activity/:id"
-            element={
+          <Route path="/add" element={<ActivityForm addActivity={addActivity} />} />  // Rota para o botão de adicionar atividade
+          
+          <Route path="/activity/:id" element={
               <ActivityDetails
                 activities={activities}
                 deleteActivity={deleteActivity}
                 editActivity={editActivity}
-              />
-            }
-          />
+              /> }/> // Rota para a página de detalhes da atividade
+
         </Routes>
       </div>
     </Router>
