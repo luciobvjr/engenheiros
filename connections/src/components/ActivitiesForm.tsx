@@ -1,69 +1,87 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './ActivitiesForm.module.css';
-
-interface ActivityFormProps {
-  addActivity: (activity: Activity) => void;
-}
 
 interface Activity {
-  id: string;
   name: string;
   place: string;
   time: string;
   description: string;
 }
 
+interface ActivityFormProps {
+  addActivity: (activity: Activity) => void;
+}
+
 const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
-  const [name, setName] = useState('');
-  const [place, setPlace] = useState('');
-  const [time, setTime] = useState('');
-  const [description, setDescription] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    place: '',
+    time: '',
+    description: '',
+  });
+
   const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const newActivity: Activity = {
-      id: Date.now().toString(),
-      name,
-      place,
-      time,
-      description,
-    };
-    addActivity(newActivity);
+
+    // Add the new activity (without ID, since it's generated in App.tsx)
+    addActivity(formData);
+
+    // Navigate back to the main page after adding the activity
     navigate('/');
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
-      <h2>Adicionar Nova Atividade</h2>
-      <input
-        type="text"
-        placeholder="Nome"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Lugar"
-        value={place}
-        onChange={(e) => setPlace(e.target.value)}
-        required
-      />
-      <input
-        type="text"
-        placeholder="Horário"
-        value={time}
-        onChange={(e) => setTime(e.target.value)}
-        required
-      />
-      <textarea
-        placeholder="Descrição"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-        required
-      />
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="place">Place:</label>
+        <input
+          type="text"
+          id="place"
+          name="place"
+          value={formData.place}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="time">Time:</label>
+        <input
+          type="text"
+          id="time"
+          name="time"
+          value={formData.time}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="description">Description:</label>
+        <textarea
+          id="description"
+          name="description"
+          value={formData.description}
+          onChange={handleChange}
+          required
+        />
+      </div>
       <button type="submit">Add Activity</button>
     </form>
   );
