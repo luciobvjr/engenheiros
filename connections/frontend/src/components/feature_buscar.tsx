@@ -7,6 +7,7 @@ interface Activity {
   name: string;
   place: string;
   time: string;
+  price: string;
   description: string;
 }
 

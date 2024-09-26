@@ -5,9 +5,9 @@ import SearchBar from '../components/feature_buscar';
 
 describe('SearchBar Component', () => {
   const mockActivities = [ // Mock para as atividades
-    { id: '1', name: 'Yoga Class', place: 'Gym', time: '10:00 AM', description: 'A relaxing yoga class.' },
-    { id: '2', name: 'English Course', place: 'School', time: '1:00 PM', description: 'Learn English.' },
-    { id: '3', name: 'Spanish Course', place: 'Online', time: '3:00 PM', description: 'Learn Spanish.' },
+    { id: '1', name: 'Yoga Class', place: 'Gym', time: '10:00 AM', price: "25.00", description: 'A relaxing yoga class.' },
+    { id: '2', name: 'English Course', place: 'School', time: '1:00 PM', price: "25.00", description: 'Learn English.' },
+    { id: '3', name: 'Spanish Course', place: 'Online', time: '3:00 PM', price: "25.00",description: 'Learn Spanish.' },
   ];
 
   it('renders the search input correctly', () => {

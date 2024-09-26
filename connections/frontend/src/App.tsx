@@ -1,16 +1,17 @@
 import type React from 'react';
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Menu from '../components/Menu';
-import ActivityDetails from '../components/ActivityDetails';
-import ActivityForm from './ActivitiesForm';
-import SearchBar from './feature_buscar';
+import Menu from './components/Menu';
+import ActivityDetails from './components/ActivityDetails';
+import ActivityForm from './components/ActivitiesForm.tsx';
+import SearchBar from './components/feature_buscar';
 
 interface Activity {
   id: string;
   name: string;
   place: string;
   time: string;
+  price: string;
   description: string;
 }
 
