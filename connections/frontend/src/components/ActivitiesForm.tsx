@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 interface Activity {
   id: string;
   name: string;
+  category: string;
   place: string;
   time: string;
   price: string;
@@ -18,6 +19,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   const [formData, setFormData] = useState({
     id: '',
     name: '',
+    category: '',
     place: '',
     time: '',
     price: '',
@@ -25,6 +27,17 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   });
 
   const navigate = useNavigate();
+  
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  
+  const categories = [
+    { label: 'Matemática', value: 'math' },
+    { label: 'Ciências', value: 'science' },
+    { label: 'História', value: 'history' },
+    { label: 'Artes', value: 'arts' },
+    { label: 'Computação', value: 'computing' },
+    { label: 'Economia e finanças', value: 'economy' }
+  ];  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -47,6 +60,22 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
         <label htmlFor="name">Nome do curso:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
       </div> 
+
+      <div>
+        <label htmlFor="category">Categoria:</label>
+        <select
+          id="category"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          <option value="">Selecione uma categoria</option>
+          {categories.map((category) => (
+            <option key={category.value} value={category.value}>
+              {category.label}
+            </option>
+          ))}
+        </select>
+      </div>
 
       <div>
         <label htmlFor="place">Local:</label>
