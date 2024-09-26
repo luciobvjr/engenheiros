@@ -1,56 +1,58 @@
-import React, { useState } from 'react';
+import type React from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ActivityDetails from './components/ActivityDetails';
-import MainPage from './components/MainPage';
-import ActivityForm from './components/ActivitiesForm'; 
-import './index.css';
+import Menu from '../components/Menu';
+import ActivityDetails from '../components/ActivityDetails';
+import ActivityForm from './ActivitiesForm';
+import SearchBar from './feature_buscar';
 
 interface Activity {
   id: string;
   name: string;
   place: string;
   time: string;
-  price: string;
   description: string;
 }
 
 const App: React.FC = () => {
+  useEffect(() => {
+    document.title = 'EduConnections';
+  }, []);
+
   const [activities, setActivities] = useState<Activity[]>([]);
-  const [idCounter, setIdCounter] = useState(1); // Faz o contador de Id começar no 1
+  const [filteredActivities, setFilteredActivities] = useState<Activity[]>(activities);
 
-  const addActivity = (activity: Omit<Activity, 'id'>) => {
-
-    const newActivity = {
-      ...activity,
-      id: idCounter.toString(), // Salva o valor de idCounter como id
-    };
-    setActivities([...activities, newActivity]); // Add the new activity to the activities array
-    setIdCounter(idCounter + 1); // Increment the ID counter
+  const addActivity = (activity: Activity) => {
+    setActivities([...activities, activity]);
+    setFilteredActivities([...activities, activity]);
   };
 
   const deleteActivity = (id: string) => {
-    setActivities(activities.filter((activity) => activity.id !== id));
+    const updatedActivities = activities.filter((activity) => activity.id !== id);
+    setActivities(updatedActivities);
+    setFilteredActivities(updatedActivities);
   };
 
-  const editActivity = (id: string, updatedActivity: Activity) => {
-    setActivities(activities.map((activity) => (activity.id === id ? updatedActivity : activity)));
+  const handleSearch = (query: string) => {
+    const filtered = activities.filter((activity) =>
+      activity.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredActivities(filtered);
   };
 
   return (
     <Router>
-      <div className="app">
+      <div>
+        <Menu activities={filteredActivities} />
+        <SearchBar activities={activities} onSearch={handleSearch} />
         <Routes>
-          <Route path="/" element={<MainPage activities={activities} />} />  // Manda as atividades para a MainPage
-
-          <Route path="/add" element={<ActivityForm addActivity={addActivity} />} />  // Rota para o botão de adicionar atividade
-          
-          <Route path="/activity/:id" element={
-              <ActivityDetails
-                activities={activities}
-                deleteActivity={deleteActivity}
-                editActivity={editActivity}
-              /> }/> // Rota para a página de detalhes da atividade
-
+          <Route path="/" element={<ActivityForm addActivity={addActivity} />} />
+          <Route
+            path="/activity/:id"
+            element={
+              <ActivityDetails activities={filteredActivities} deleteActivity={deleteActivity} />
+            }
+          />
         </Routes>
       </div>
     </Router>
