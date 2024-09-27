@@ -92,7 +92,6 @@ const App: React.FC = () => {
           <Route path="/add" element={<ActivityForm addActivity={addActivity} />} /> 
           <Route path="/activity/:id" element={
               <ActivityDetails
-                activities={activities}
                 deleteActivity={deleteActivity}
                 editActivity={editActivity}
               />} 
