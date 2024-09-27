@@ -27,9 +27,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   });
 
   const navigate = useNavigate();
-  
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
-  
+
   const categories = [
     { label: 'Matemática', value: 'math' },
     { label: 'Ciências', value: 'science' },
@@ -37,9 +35,9 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
     { label: 'Artes', value: 'arts' },
     { label: 'Computação', value: 'computing' },
     { label: 'Economia e finanças', value: 'economy' }
-  ];  
+  ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -53,8 +51,6 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   };
 
   return (
-    // Html do formulário de adicionar atividade
-
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Nome do curso:</label>
@@ -63,11 +59,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
 
       <div>
         <label htmlFor="category">Categoria:</label>
-        <select
-          id="category"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
+        <select id="category" name="category" value={formData.category} onChange={handleChange} required>
           <option value="">Selecione uma categoria</option>
           {categories.map((category) => (
             <option key={category.value} value={category.value}>
@@ -89,7 +81,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
 
       <div>
         <label htmlFor="price">Valor:</label>
-        <input type="text" id="price" name="price" value={formData.price} onChange={handleChange} required/>
+        <input type="text" id="price" name="price" value={formData.price} onChange={handleChange} required />
       </div>
 
       <div>

@@ -8,6 +8,7 @@ import './index.css';
 interface Activity {
   id: string;
   name: string;
+  category: string;
   place: string;
   time: string;
   price: string;
