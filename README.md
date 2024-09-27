@@ -43,3 +43,8 @@ Para rodar o projeto, é necessário ter o **npm** instalado. Caso ainda não te
    ```
 
 4. O link do servidor no qual o projeto será aberto será exibido no terminal. É só clicar com ctrl + click para ser redirecionado para a página.
+
+## Deploy do projeto
+
+O deploy do projeto foi feito utilizando a [Vercel](https://vercel.com/home) e pode ser acessado nessa URL:
+https://educonnect-indol.vercel.app/
