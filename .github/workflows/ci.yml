@@ -45,6 +45,6 @@ jobs:
       run: npm run build
       working-directory: ./connections/backend
 
-#    - name: Run backend tests
-#      run: npm test
-#      working-directory: ./connections/backend
+    - name: Run backend tests
+      run: npm test
+      working-directory: ./connections/backend
