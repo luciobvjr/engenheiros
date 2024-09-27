@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import type Activity from './models/Activity';
+import type Activity from '../models/Activity';
 
 interface MainPageProps {
   activities: Activity[];
