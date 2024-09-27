@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import SearchBar from '../components/feature_buscar';
@@ -15,7 +14,7 @@ describe('SearchBar Component', () => {
 
     // Verifica se o input de busca está no documento
     const searchInput = screen.getByPlaceholderText('Search for activities or users...');
-    expect(searchInput).toBeInTheDocument();
+    expect(searchInput).toBeTruthy();
   });
 
   it('calls the onSearch function when typing in the input', () => {
@@ -41,6 +40,6 @@ describe('SearchBar Component', () => {
     fireEvent.change(searchInput, { target: { value: 'english' } });
 
     // Verifica se o valor do input foi atualizado
-    expect(searchInput).toHaveValue('english');
+    expect((searchInput as HTMLInputElement).value).toBe('english');
   });
 });
