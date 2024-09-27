@@ -10,6 +10,14 @@ interface Activity {
   price: string;
   description: string;
 }
+const categories = [
+  { label: 'Matemática', value: 'math' },
+  { label: 'Ciências', value: 'science' },
+  { label: 'História', value: 'history' },
+  { label: 'Artes', value: 'arts' },
+  { label: 'Computação', value: 'computing' },
+  { label: 'Economia e finanças', value: 'economy' }
+]; 
 
 interface ActivityDetailsProps {
   activities: Activity[];
@@ -52,7 +60,15 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
         <form onSubmit={handleEditSubmit}>
           <input type="text" value={editedActivity?.name} onChange={(e) => setEditedActivity({ ...editedActivity!, name: e.target.value })} required />
 
-          <input type="text" value={editedActivity?.category} onChange={(e) => setEditedActivity({ ...editedActivity!, category: e.target.value })} required />
+          <select id="category" value={editedActivity?.category} onChange={(e) => setEditedActivity({ ...editedActivity!, category: e.target.value }) } required >
+            <option value="">Selecione uma categoria</option>
+            {categories.map((category) => (
+              <option key={category.value} value={category.value}>
+                {category.label}
+              </option>
+            ))}
+          </select>
+
 
           <input type="text" value={editedActivity?.place} onChange={(e) => setEditedActivity({ ...editedActivity!, place: e.target.value })} required />
 
