@@ -1,14 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-interface Activity {
-  id: string;
-  name: string;
-  place: string;
-  time: string;
-  price: string;
-  description: string;
-}
+import type Activity from './models/Activity';
 
 interface MainPageProps {
   activities: Activity[];

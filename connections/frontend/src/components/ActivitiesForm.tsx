@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-interface Activity {
-  id: string;
-  name: string;
-  place: string;
-  time: string;
-  price: string;
-  description: string;
-}
+import type Activity from '../models/Activity';
 
 interface ActivityFormProps {
-  addActivity: (activity: Activity) => void;
+  addActivity: (activity: Omit<Activity, 'id'>) => void;
 }
 
 const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   const [formData, setFormData] = useState({
-    id: '',
     name: '',
-    place: '',
-    time: '',
-    price: '',
+    localization: '',
+    timetable: '',
+    price: 0,
     description: '',
   });
 
@@ -28,20 +19,21 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData({
+      ...formData,
+      [name]: name === 'price' ? Number(value) : value,
+    });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    addActivity(formData);  // Adiciona a atividade
+    addActivity(formData);
 
     navigate('/');
   };
 
   return (
-    // Html do formulário de adicionar atividade
-
     <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="name">Nome do curso:</label>
@@ -49,24 +41,25 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
       </div> 
 
       <div>
-        <label htmlFor="place">Local:</label>
-        <input type="text" id="place" name="place" value={formData.place} onChange={handleChange} required />
+        <label htmlFor="localization">Local:</label>
+        <input type="text" id="localization" name="localization" value={formData.localization} onChange={handleChange} required />
       </div>
 
       <div>
-        <label htmlFor="time">Horário:</label>
-        <input type="text" id="time" name="time" value={formData.time} onChange={handleChange} required />
+        <label htmlFor="timetable">Horário:</label>
+        <input type="text" id="timetable" name="timetable" value={formData.timetable} onChange={handleChange} required />
       </div>
 
       <div>
         <label htmlFor="price">Valor:</label>
-        <input type="text" id="price" name="price" value={formData.price} onChange={handleChange} required/>
+        <input type="number" id="price" name="price" value={formData.price} onChange={handleChange} required />
       </div>
 
       <div>
         <label htmlFor="description">Descrição:</label>
         <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
       </div>
+
       <button type="submit">Adicionar curso</button>
     </form>
   );
