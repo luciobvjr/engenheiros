@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Form.css';
 
 interface Activity {
   id: string;
@@ -51,8 +52,10 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
   };
 
   return (
+    <>
+    <h2>Adicionar curso</h2>
     <form onSubmit={handleSubmit}>
-      <div>
+      <div className='form_div'>
         <label htmlFor="name">Nome do curso:</label>
         <input type="text" id="name" name="name" value={formData.name} onChange={handleChange} required />
       </div> 
@@ -89,7 +92,7 @@ const ActivityForm: React.FC<ActivityFormProps> = ({ addActivity }) => {
         <textarea id="description" name="description" value={formData.description} onChange={handleChange} required />
       </div>
       <button type="submit">Adicionar curso</button>
-    </form>
+    </form></>
   );
 };
 

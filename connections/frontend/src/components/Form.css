@@ -1,0 +1,12 @@
+form div{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 4px;
+}
+form div label{
+    font-weight: medium;
+    padding-bottom: 4px;
+}   
+form button{
+    margin: 10px;
+}

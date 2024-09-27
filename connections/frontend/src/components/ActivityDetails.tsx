@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import './Form.css';
 
 interface Activity {
   id: string;
@@ -57,30 +58,49 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
 
     <div>
       {isEditing ? ( // formulário para editar a atividade
+
+        <><h2>Edição do curso</h2>
         <form onSubmit={handleEditSubmit}>
-          <input type="text" value={editedActivity?.name} onChange={(e) => setEditedActivity({ ...editedActivity!, name: e.target.value })} required />
+          <div>
+            <label htmlFor="name">Nome do curso:</label>
+            <input type="text" value={editedActivity?.name} id="name" name="name" onChange={(e) => setEditedActivity({ ...editedActivity!, name: e.target.value })} required />
+          </div>
 
-          <select id="category" value={editedActivity?.category} onChange={(e) => setEditedActivity({ ...editedActivity!, category: e.target.value }) } required >
-            <option value="">Selecione uma categoria</option>
-            {categories.map((category) => (
-              <option key={category.value} value={category.value}>
-                {category.label}
-              </option>
-            ))}
-          </select>
+          <div>
+            <label htmlFor="category">Categoria:</label>
+            <select id="category" name="category" value={editedActivity?.category} onChange={(e) => setEditedActivity({ ...editedActivity!, category: e.target.value })} required>
+              <option value="">Selecione uma categoria</option>
+              {categories.map((category) => (
+                <option key={category.value} value={category.value}>
+                  {category.label}
+                </option>
+              ))}
+            </select>
+          </div>
 
+          <div>
+            <label htmlFor="place">Local:</label>
+            <input id="place" name="place" type="text" value={editedActivity?.place} onChange={(e) => setEditedActivity({ ...editedActivity!, place: e.target.value })} required />
+          </div>
 
-          <input type="text" value={editedActivity?.place} onChange={(e) => setEditedActivity({ ...editedActivity!, place: e.target.value })} required />
+          <div>
+            <label htmlFor="time">Horário:</label>
+            <input type="text" id="time" name="time" value={editedActivity?.time} onChange={(e) => setEditedActivity({ ...editedActivity!, time: e.target.value })} required />
+          </div>
 
-          <input type="text" value={editedActivity?.time} onChange={(e) => setEditedActivity({ ...editedActivity!, time: e.target.value })} required />
+          <div>
+            <label htmlFor="price">Valor:</label>
+            <input type="text" value={editedActivity?.price} onChange={(e) => setEditedActivity({ ...editedActivity!, price: e.target.value })} required />
+          </div>
 
-          <input type="text" value={editedActivity?.price} onChange={(e) => setEditedActivity({ ...editedActivity!, price: e.target.value })} required />
-
-          <textarea value={editedActivity?.description} onChange={(e) => setEditedActivity({ ...editedActivity!, description: e.target.value })} required />
+          <div>
+            <label htmlFor="description">Descrição:</label>
+            <textarea id="description" name="description" value={editedActivity?.description} onChange={(e) => setEditedActivity({ ...editedActivity!, description: e.target.value })} required />
+          </div>
 
           <button type="submit">Salvar alterações</button>
           <button type="button" onClick={() => setIsEditing(false)}>Cancelar</button>
-        </form>
+        </form></>
       ) : (
         <>
           <h2>{activity.name}</h2>
