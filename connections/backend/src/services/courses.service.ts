@@ -12,6 +12,23 @@ export class CourseService {
     
         return data;
     }
+
+    async getCourseById(id: string) {
+        const { data, error } = await database
+                                    .from('courses')
+                                    .select('*')
+                                    .match({ id: id });
+        
+        if (error) {
+            throw new Error('Internal server error');
+        }
+
+        if (data.length === 0) {
+            throw new Error('Course not found');
+        }
+    
+        return data[0];
+    }
     
     async createCourse(course: Course) {
         const { data, error } = await database

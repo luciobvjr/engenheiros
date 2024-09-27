@@ -15,6 +15,17 @@ export class CourseController {
         }
     }
 
+    async getCourseById(req: Request, res: Response) {
+        console.log('Getting a course by id');
+        try {
+            const course = await this.courseService.getCourseById(req.params.id);
+            res.json(course);
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal server error');
+        }
+    }
+
     async createCourse(req: Request, res: Response) {
         console.log('Creating a new course');
         try {
