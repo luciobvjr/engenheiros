@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 interface Activity {
   id: string;
   name: string;
+  category: string;
   place: string;
   time: string;
   price: string;

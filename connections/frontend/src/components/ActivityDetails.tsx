@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 interface Activity {
   id: string;
   name: string;
+  category: string;
   place: string;
   time: string;
   price: string;
@@ -51,6 +52,8 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
         <form onSubmit={handleEditSubmit}>
           <input type="text" value={editedActivity?.name} onChange={(e) => setEditedActivity({ ...editedActivity!, name: e.target.value })} required />
 
+          <input type="text" value={editedActivity?.category} onChange={(e) => setEditedActivity({ ...editedActivity!, category: e.target.value })} required />
+
           <input type="text" value={editedActivity?.place} onChange={(e) => setEditedActivity({ ...editedActivity!, place: e.target.value })} required />
 
           <input type="text" value={editedActivity?.time} onChange={(e) => setEditedActivity({ ...editedActivity!, time: e.target.value })} required />
@@ -65,6 +68,7 @@ const ActivityDetails: React.FC<ActivityDetailsProps> = ({ activities, deleteAct
       ) : (
         <>
           <h2>{activity.name}</h2>
+          <p>Categoria: {activity.category}</p>
           <p>Local: {activity.place}</p>
           <p>Horário: {activity.time}</p>
           <p>Preço: R$ {activity.price}</p>
